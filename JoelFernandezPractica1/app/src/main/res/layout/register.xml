@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="User"
+        android:id="@+id/textView3"
+        android:layout_marginLeft="25dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etuserregister"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:hint="Introduce your user name"
+        android:hyphenationFrequency="normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Password"
+        android:id="@+id/textView4"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+
+        android:ems="10"
+        android:id="@+id/etpassregister"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:hint="Introduce your passworld"
+        android:hyphenationFrequency="full" />
+
+    <EditText
+        android:layout_width="313dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/etpassregister2"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:hint="Repeat your passworld" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Cancel"
+            android:id="@+id/buttoncancel"
+            android:background="@drawable/buton"
+            android:textColor="#f2f2f2"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="Ok"
+            android:id="@+id/buttonregister"
+            android:background="@drawable/buton"
+            android:textColor="#f2f2f2"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>
