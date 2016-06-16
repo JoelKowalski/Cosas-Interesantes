@@ -22,6 +22,7 @@ public class MainActivity extends FragmentActivity
         pager.setAdapter(mapager);
         tab_strp=(PagerTabStrip)findViewById(R.id.tab_strip);
         tab_strp.setTextColor(Color.WHITE);
+        tab_strp.setTextSpacing(10);
 
     }
     @Override

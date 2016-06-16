@@ -60,6 +60,37 @@ public class DataBase extends SQLiteOpenHelper {
         }
 
     }
+    public int ComprobarPass(String pass,String user){
+        String consulta = "SELECT pass FROM USUARIO WHERE usuario LIKE '%"+user+"%';";
+        SQLiteDatabase basedatos = this.getReadableDatabase();
+        Cursor cursor = basedatos.rawQuery(consulta, null);
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            if(pass.equals(cursor.getString(0))){
+                return 0;//usuario y edittext coinciden
+            }else{
+                return 1;//usuario y edittext no coinciden
+            }
+        }else{
+            return 2;  //la base de datos esta vacia
+        }
+    }
+    public int ComprobarFavoritos(String user) {
+        String consulta = "SELECT fav FROM USUARIO where usuario = '"+user+"';";
+        SQLiteDatabase basedatos = this.getReadableDatabase();
+        Cursor cursor = basedatos.rawQuery(consulta, null);
+        if(cursor.moveToFirst()){
+            cursor.moveToFirst();
+            if(cursor.getInt(0) == 0){
+                return 0;//usuario no tiene favs
+            }else{
+                return 1;//usuario tiene favs
+            }
+        }else{
+            return 2;  //la base de datos esta vacia
+        }
+
+    }
     public void insertarusuario (Usuario usuario){
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL("INSERT INTO USUARIO (usuario,pass,fav) VALUES ('"+ usuario.getUser()+"' , '"+ usuario.getPass()+"', "+ usuario.getFav()+")");

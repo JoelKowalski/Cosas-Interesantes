@@ -6,6 +6,7 @@ package com.example.usuario.joelfernandezpractica1;
 public class Imagenes {
     int[] ImagenesBanderas={R.drawable.alemania,R.drawable.america,R.drawable.francia,R.drawable.italia,R.drawable.portugal,R.drawable.suecia};
     int[] ImagenesCoches={R.drawable.coche1,R.drawable.coche3,R.drawable.coche2,R.drawable.coche4,R.drawable.coche5};
+    String[] datosImagenes={"Imagenes de banderas","Imagenes de coches"};
 
 
     public int dameLongitudBanderas(){
@@ -19,5 +20,8 @@ public class Imagenes {
     }
     public int dameEsteCoche(int pos ){
         return ImagenesCoches[pos];
+    }
+    public String[] dameDatos(){
+        return datosImagenes;
     }
 }
