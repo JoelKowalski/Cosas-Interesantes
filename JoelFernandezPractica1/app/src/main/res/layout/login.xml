@@ -19,6 +19,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginTop="10dp"
+        android:singleLine="true"
         android:hint="Introduce your user name"
         android:hyphenationFrequency="normal" />
 
@@ -40,8 +41,9 @@
         <EditText
             android:layout_width="230dp"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
+            android:inputType="text"
             android:ems="10"
+            android:singleLine="true"
             android:id="@+id/etpasslogin"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
@@ -49,6 +51,7 @@
             android:hyphenationFrequency="full" />
 
         <CheckBox
+            android:checked="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Show pass"

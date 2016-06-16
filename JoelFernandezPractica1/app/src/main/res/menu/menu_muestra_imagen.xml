@@ -4,7 +4,7 @@
     tools:context="com.example.usuario.joelfernandezpractica1.MuestraImagen">
 
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/favorites"
         android:icon="@android:drawable/btn_star"
         app:showAsAction="ifRoom"/>
 

@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,6 +18,7 @@ public class Controlador implements View.OnClickListener {
     Context c;
     EditText usuariologin, passlogin, userregister, passregister ,passregister2;
     DataBase baseDatos;
+    CheckBox checkBox;
 
     public Controlador(Context c) {
         this.c = c;
@@ -35,7 +38,7 @@ public class Controlador implements View.OnClickListener {
                         if (baseDatos.ComprobarExistente(usuariologin.getText().toString())==0) {
                             if(baseDatos.ComprobarPass(usuariologin.getText().toString(),passlogin.getText().toString())==0) {
                                 limpiar();
-                                abrirActividad(c);
+                                abrirActividadImagenes(c);
                             }else{
                                 Utils.MostrarToast(c, "Incorrect password");
                             }
@@ -62,12 +65,14 @@ public class Controlador implements View.OnClickListener {
                                 Usuario usuario = new Usuario(userregister.getText().toString(), passregister.getText().toString(), 0);
                                 baseDatos.insertarusuario(usuario);
                                 limpiar();
-                                abrirActividad(c);
+                                Utils.MostrarToast(c, "Insert successfully");
+                                abrirActividadImagenes(c);
                             }else{
                                 Usuario usuario = new Usuario(userregister.getText().toString(), passregister.getText().toString(), 0);
                                 baseDatos.insertarusuario(usuario);
+                                limpiar();
                                 Utils.MostrarToast(c, "Insert successfully");
-                                abrirActividad(c);
+                                abrirActividadImagenes(c);
                             }
                         }else{
                             Utils.MostrarToast(c, "Passwords fields don`t match");
@@ -79,9 +84,24 @@ public class Controlador implements View.OnClickListener {
                     Utils.MostrarToast(c, "User field is empty, please fill it");
                 }
                 break;
-
+            case R.id.favorites:
+                abrirActividadFavoritos(c);
+                break;
+            case R.id.checkBox:
+                MostrarNoMostrar();
+                break;
         }
     }
+
+    private void MostrarNoMostrar() {
+        //ESTO ESTA A CAPON
+        if(passlogin.getInputType()==129)
+             passlogin.setInputType(1);
+        else
+            passlogin.setInputType(129);
+
+    }
+
 
     private void inicializar() {
         Activity a = null;
@@ -91,6 +111,7 @@ public class Controlador implements View.OnClickListener {
         userregister = (EditText) a.findViewById(R.id.etuserregister);
         passregister = (EditText) a.findViewById(R.id.etpassregister);
         passregister2 = (EditText) a.findViewById(R.id.etpassregister2);
+
         passlogin = (EditText) a.findViewById(R.id.etpasslogin);
     }
 
@@ -101,14 +122,19 @@ public class Controlador implements View.OnClickListener {
         passlogin.setText("");
     }
 
-    private void abrirActividad(Context c) {
-
+    private void abrirActividadImagenes(Context c) {
         Activity a = null;
         a = (Activity) c;
         Intent i = new Intent(c, MuestraImagen.class);
         a.startActivity(i);
-
     }
+    public void abrirActividadFavoritos(Context c) {
+        Activity a = null;
+        a = (Activity) c;
+        Intent i = new Intent(c, Favoritos.class);
+        a.startActivity(i);
+    }
+
 
 
 

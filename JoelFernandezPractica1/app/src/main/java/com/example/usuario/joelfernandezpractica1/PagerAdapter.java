@@ -10,9 +10,12 @@ import java.util.Locale;
  * Created by Usuario on 10/06/2016.
  */
 public class PagerAdapter extends FragmentPagerAdapter {
+
+
     public PagerAdapter(FragmentManager fm) {
         super(fm);
     }
+
 
 
     @Override
