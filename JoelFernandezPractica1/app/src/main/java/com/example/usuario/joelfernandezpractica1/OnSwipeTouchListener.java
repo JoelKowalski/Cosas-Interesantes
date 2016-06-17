@@ -65,7 +65,7 @@ public class OnSwipeTouchListener implements View.OnTouchListener {
     }
 
     public void onSwipeRight() {
-       Log.i("Puta", "POlla");
+
     }
 
     public void onSwipeLeft() {

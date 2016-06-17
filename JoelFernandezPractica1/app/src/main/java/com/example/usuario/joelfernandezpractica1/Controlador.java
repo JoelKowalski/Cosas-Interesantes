@@ -120,6 +120,7 @@ public class Controlador implements View.OnClickListener {
         userregister.setText("");
         passregister.setText("");
         passlogin.setText("");
+        passregister2.setText("");
     }
 
     private void abrirActividadImagenes(Context c) {

@@ -5,8 +5,11 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 /**
  * Created by Usuario on 16/06/2016.
@@ -39,12 +42,25 @@ public class CustomSwipe extends PagerAdapter {
         li=(LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemview=li.inflate(R.layout.swipe_layout,container,false);
         ImageView imageview= (ImageView) itemview.findViewById(R.id.imageView);
+         //ImageView likeimagen=(ImageView)itemview.findViewById(R.id.imageView2);
         if(caragador==1) {
             imageview.setImageResource(modelArrays.dameEstaMoto(position));
         }else{
             imageview.setImageResource(modelArrays.dameEsteCoche(position));
         }
-
+        imageview.setOnTouchListener(new OnSwipeTouchListener(ctx){
+            public void onSwipeTop(){
+                Toast.makeText(ctx, "Like", Toast.LENGTH_SHORT).show();
+                //likeimagen.setImageResource(R.drawable.like);
+              //  Animation efecto;
+               // efecto= AnimationUtils.loadAnimation(ctx,R.animator.efecto);
+             //   efecto.reset();
+             //   likeimagen.startAnimation(efecto);
+            }
+            public void onSwipeBottom(){
+                Toast.makeText(ctx, "DisLike", Toast.LENGTH_SHORT).show();
+            }
+         });
         container.addView(itemview);
         return itemview;
     }

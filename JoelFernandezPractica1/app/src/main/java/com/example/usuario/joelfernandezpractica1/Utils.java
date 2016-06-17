@@ -9,7 +9,7 @@ import android.widget.Toast;
 public class Utils {
      static  final int NUMERO_DE_TABS = 2;
      public static void MostrarToast(Context ctx,String mensaje) {
-          Toast.makeText(ctx, mensaje, Toast.LENGTH_SHORT).show();
+          Toast.makeText(ctx, mensaje, Toast.LENGTH_LONG).show();
      }
 
 }

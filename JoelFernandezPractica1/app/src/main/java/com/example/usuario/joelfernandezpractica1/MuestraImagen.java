@@ -9,15 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 public class MuestraImagen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     ViewPager viewPager;
     CustomSwipe customSwipe;
     Spinner combo;
+    ImageView imagenlike;
     Imagenes imagenes =new Imagenes();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,10 @@ public class MuestraImagen extends AppCompatActivity implements AdapterView.OnIt
         ArrayAdapter<String> lista= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,imagenes.dameDatos());
         combo.setAdapter(lista);
         combo.setOnItemSelectedListener(this);
+
+
+
+
     }
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
