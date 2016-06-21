@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.*;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -15,12 +16,16 @@ public class MainActivity extends FragmentActivity
     {
         ViewPager pager;
         PagerTabStrip tab_strp;
+        DataBase dt;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
+
         android.support.v4.view.PagerAdapter mapager=new PagerAdapter(getSupportFragmentManager());
         pager=(ViewPager)findViewById(R.id.pager);
         pager.setAdapter(mapager);

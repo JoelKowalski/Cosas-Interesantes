@@ -60,7 +60,7 @@ public class DataBase extends SQLiteOpenHelper {
         }
 
     }
-    public int ComprobarPass(String pass,String user){
+    public int ComprobarPass(String user,String pass){
         String consulta = "SELECT pass FROM USUARIO WHERE usuario LIKE '%"+user+"%';";
         SQLiteDatabase basedatos = this.getReadableDatabase();
         Cursor cursor = basedatos.rawQuery(consulta, null);
@@ -75,6 +75,7 @@ public class DataBase extends SQLiteOpenHelper {
             return 2;  //la base de datos esta vacia
         }
     }
+
     public int ComprobarFavoritos(String user) {
         String consulta = "SELECT fav FROM USUARIO where usuario = '"+user+"';";
         SQLiteDatabase basedatos = this.getReadableDatabase();
