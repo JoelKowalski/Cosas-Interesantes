@@ -19,7 +19,7 @@ public class CustomSwipe extends PagerAdapter {
     private int caragador;
     private DataBase dataBase;
     private String usuario;
-    //OnSwipeTouchListener onSwipeTouchListener=new OnSwipeTouchListener(ctx);
+    OnSwipeTouchListener onSwipeTouchListener=new OnSwipeTouchListener(ctx);
     Imagenes modelArrays =new Imagenes();
     private LayoutInflater li;
 
