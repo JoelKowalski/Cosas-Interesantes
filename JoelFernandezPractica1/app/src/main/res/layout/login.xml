@@ -48,7 +48,7 @@
             android:id="@+id/etpasslogin"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="10dp"
-            android:hint="Introduce your passworld"
+            android:hint="Introduce your password"
             android:hyphenationFrequency="full" />
 
         <CheckBox

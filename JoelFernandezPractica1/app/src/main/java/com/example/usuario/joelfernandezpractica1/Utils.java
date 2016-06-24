@@ -11,5 +11,13 @@ public class Utils {
      public static void MostrarToast(Context ctx,String mensaje) {
           Toast.makeText(ctx, mensaje, Toast.LENGTH_LONG).show();
      }
+     public static String usuario;
 
+     public static String getUsuario() {
+          return usuario;
+     }
+
+     public static void setUsuario(String usuario) {
+          Utils.usuario = usuario;
+     }
 }

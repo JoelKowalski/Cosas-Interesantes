@@ -16,7 +16,6 @@ public class MainActivity extends FragmentActivity
     {
         ViewPager pager;
         PagerTabStrip tab_strp;
-        DataBase dt;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
 
@@ -52,7 +51,6 @@ public class MainActivity extends FragmentActivity
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

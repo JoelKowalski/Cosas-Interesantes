@@ -29,7 +29,7 @@ public class MuestraImagen extends AppCompatActivity implements AdapterView.OnIt
 
         setContentView(R.layout.activity_muestra_imagen);
         viewPager=(ViewPager)findViewById(R.id.viewpager);
-        customSwipe=new CustomSwipe(MuestraImagen.this,1);
+        customSwipe=new CustomSwipe(MuestraImagen.this,1,getIntent().getExtras().getString("Clave"));
         viewPager.setAdapter(customSwipe);
         combo=(Spinner)findViewById(R.id.spinner);
         ArrayAdapter<String> lista= new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,imagenes.dameDatos());
@@ -43,11 +43,11 @@ public class MuestraImagen extends AppCompatActivity implements AdapterView.OnIt
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position){
             case 0:
-                customSwipe = new CustomSwipe(MuestraImagen.this,1);
+                customSwipe = new CustomSwipe(MuestraImagen.this,1,getIntent().getExtras().getString("Clave"));
                 viewPager.setAdapter(customSwipe);
                 break;
             case 1:
-                customSwipe=new CustomSwipe(MuestraImagen.this,2);
+                customSwipe=new CustomSwipe(MuestraImagen.this,2,getIntent().getExtras().getString("Clave"));
                 viewPager.setAdapter(customSwipe);
                 break;
         }

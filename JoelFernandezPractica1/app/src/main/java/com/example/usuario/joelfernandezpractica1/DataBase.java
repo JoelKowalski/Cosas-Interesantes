@@ -4,6 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Usuario on 10/06/2016.
@@ -12,7 +16,7 @@ public class DataBase extends SQLiteOpenHelper {
 
             // favorito boleano 0 para no 1 para si
     private final String sqlCreacionTablaUsuario = "CREATE TABLE USUARIO (id INTEGER PRIMARY KEY AUTOINCREMENT, usuario TEXT, pass TEXT,fav number)";
-    private final String sqlCreacionTablaFoto = ("CREATE TABLE FOTO(idfoto INTEGER PRIMARY KEY references USUARIO(id),foto number)");
+    private final String sqlCreacionTablaFoto = ("CREATE TABLE FOTO(idusuario TEXT  references USUARIO(usuario),foto number)");
 
     public DataBase(Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version) {
         super(contexto, nombre, factory, version); //el método padre, llamará a Oncreate o OnUpgrade, segn corresponda
@@ -22,7 +26,7 @@ public class DataBase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL(sqlCreacionTablaUsuario);
-
+        db.execSQL(sqlCreacionTablaFoto);
     }
 
     @Override
@@ -76,98 +80,66 @@ public class DataBase extends SQLiteOpenHelper {
         }
     }
 
-    public int ComprobarFavoritos(String user) {
-        String consulta = "SELECT fav FROM USUARIO where usuario = '"+user+"';";
-        SQLiteDatabase basedatos = this.getReadableDatabase();
-        Cursor cursor = basedatos.rawQuery(consulta, null);
-        if(cursor.moveToFirst()){
-            cursor.moveToFirst();
-            if(cursor.getInt(0) == 0){
-                return 0;//usuario no tiene favs
-            }else{
-                return 1;//usuario tiene favs
-            }
-        }else{
-            return 2;  //la base de datos esta vacia
-        }
-
-    }
     public void insertarusuario (Usuario usuario){
         SQLiteDatabase database = this.getWritableDatabase();
         database.execSQL("INSERT INTO USUARIO (usuario,pass,fav) VALUES ('"+ usuario.getUser()+"' , '"+ usuario.getPass()+"', "+ usuario.getFav()+")");
         this.cerrarBaseDatos(database);
     }
-/*
-    public void insertarCoche (Coche coche)
-    {
 
+    public void insertarFav (String usuario,int codigoFoto){
+        if(!fotoYaEsFav(codigoFoto,usuario)) {
+            SQLiteDatabase database = this.getWritableDatabase();
+            database.execSQL("INSERT INTO FOTO (idusuario,foto) VALUES ('"+ usuario +"' , "+ codigoFoto +");");
+            this.cerrarBaseDatos(database);
+        }
+    }
+    public boolean fotoYaEsFav(int idfoto,String usuario){
+        String consulta = "SELECT * FROM FOTO where foto = "+idfoto+" and idusuario= '"+usuario+"';";
+        SQLiteDatabase basedatos = this.getReadableDatabase();
+        Cursor cursor = basedatos.rawQuery(consulta, null);
+        if(cursor.moveToFirst()) {
+
+                return true;//esa foto no es fav
+
+        }else{
+            return false;
+        }
+
+    }
+    public int[] DameFavs(String usuario){
+        int[] favoritos;
+        int contadorDefotos=0;
+        int foto=0;
+        String consulta = "SELECT foto FROM FOTO where idusuario = '"+usuario+"';";
+        SQLiteDatabase basedatos = this.getReadableDatabase();
+        Cursor cursor = basedatos.rawQuery(consulta, null);
+        favoritos= new int[cursor.getCount()];
+        contadorDefotos=cursor.getCount();
+        if(cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            do
+            {
+                foto=cursor.getInt(0);
+                favoritos[contadorDefotos-1]=foto;
+                contadorDefotos--;
+            }while (cursor.moveToNext());
+            cursor.close();
+        }
+
+        return favoritos;
+    }
+    public int DameLongitud(String usuario) {
+        String consulta = "SELECT count(foto) FROM FOTO where idusuario = '"+usuario+"';";
+        SQLiteDatabase basedatos = this.getReadableDatabase();
+        Cursor cursor = basedatos.rawQuery(consulta, null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
+    }
+    public void eliminarFav(String usuario,int codigoFoto){
         SQLiteDatabase database = this.getWritableDatabase();
-        database.execSQL("INSERT INTO COCHE (modelo, idpersona) VALUES ('"+coche.getModelo()+"' , "+coche.getPersona().getId()+")");
+        database.execSQL("Delete from foto where idusuario='"+usuario+"' and foto="+codigoFoto+";");
         this.cerrarBaseDatos(database);
     }
 
-    public Persona buscarPersona (String nombre)
-    {
-        Persona persona = null;
-        int aux_id = -1;
-        String nombre_aux = null;
 
-        String consulta = "SELECT id, nombre FROM PERSONA WHERE nombre LIKE %"+nombre+"%;";
-
-
-        SQLiteDatabase basedatos = this.getReadableDatabase();
-        Cursor cursor = basedatos.rawQuery(consulta, null);
-
-
-        if( cursor != null || cursor.getCount() >=0)
-        {
-            cursor.moveToFirst();
-
-            aux_id = cursor.getInt(0); //la posicion primera, el id
-            nombre_aux = cursor.getString(1); //la posicion segunda, el id
-            persona = new Persona(aux_id, nombre_aux);
-
-            cursor.close();
-        }
-
-        this.cerrarBaseDatos(basedatos);
-
-        return persona;
-    }
-
-
-
-    public List<Coche> buscarCochesPersona (Persona persona)
-    {
-        List<Coche> lista_coches = null;
-        Coche coche = null;
-        int aux_id = -1;
-        String modelo = null;
-
-
-        String consulta = "SELECT modelo FROM COCHE WHERE idpersona ="+persona.getId();
-
-        SQLiteDatabase basedatos = this.getReadableDatabase();
-        Cursor cursor = basedatos.rawQuery(consulta, null);
-
-
-        if( cursor != null || cursor.getCount() <=0)
-        {
-            cursor.moveToFirst();
-            lista_coches = new ArrayList<Coche>(cursor.getCount());
-
-            do
-            {
-                modelo = cursor.getString(0); //la posicion primera, el id
-                coche = new Coche(modelo);
-                lista_coches.add(coche);
-            }while (cursor.moveToNext());
-
-            cursor.close();
-        }
-
-        this.cerrarBaseDatos(basedatos);
-        return lista_coches;
-    }
-    */
 }

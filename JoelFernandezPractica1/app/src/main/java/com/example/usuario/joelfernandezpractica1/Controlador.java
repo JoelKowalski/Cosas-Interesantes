@@ -18,7 +18,7 @@ public class Controlador implements View.OnClickListener {
     Context c;
     EditText usuariologin, passlogin, userregister, passregister ,passregister2;
     DataBase baseDatos;
-    CheckBox checkBox;
+    //CheckBox checkBox;
 
     public Controlador(Context c) {
         this.c = c;
@@ -37,7 +37,6 @@ public class Controlador implements View.OnClickListener {
                     if(!passlogin.getText().toString().isEmpty()) {
                         if (baseDatos.ComprobarExistente(usuariologin.getText().toString())==0) {
                             if(baseDatos.ComprobarPass(usuariologin.getText().toString(),passlogin.getText().toString())==0) {
-                                limpiar();
                                 abrirActividadImagenes(c);
                             }else{
                                 Utils.MostrarToast(c, "Incorrect password");
@@ -64,13 +63,11 @@ public class Controlador implements View.OnClickListener {
                             }else if(baseDatos.ComprobarExistente(userregister.getText().toString())==1){
                                 Usuario usuario = new Usuario(userregister.getText().toString(), passregister.getText().toString(), 0);
                                 baseDatos.insertarusuario(usuario);
-                                limpiar();
                                 Utils.MostrarToast(c, "Insert successfully");
                                 abrirActividadImagenes(c);
                             }else{
                                 Usuario usuario = new Usuario(userregister.getText().toString(), passregister.getText().toString(), 0);
                                 baseDatos.insertarusuario(usuario);
-                                limpiar();
                                 Utils.MostrarToast(c, "Insert successfully");
                                 abrirActividadImagenes(c);
                             }
@@ -92,7 +89,6 @@ public class Controlador implements View.OnClickListener {
                 break;
         }
     }
-
     private void MostrarNoMostrar() {
         //ESTO ESTA A CAPON
         if(passlogin.getInputType()==129)
@@ -101,8 +97,6 @@ public class Controlador implements View.OnClickListener {
             passlogin.setInputType(129);
 
     }
-
-
     private void inicializar() {
         Activity a = null;
         a = (Activity) c;
@@ -111,10 +105,8 @@ public class Controlador implements View.OnClickListener {
         userregister = (EditText) a.findViewById(R.id.etuserregister);
         passregister = (EditText) a.findViewById(R.id.etpassregister);
         passregister2 = (EditText) a.findViewById(R.id.etpassregister2);
-
         passlogin = (EditText) a.findViewById(R.id.etpasslogin);
     }
-
     private void limpiar() {
         usuariologin.setText("");
         userregister.setText("");
@@ -122,11 +114,18 @@ public class Controlador implements View.OnClickListener {
         passlogin.setText("");
         passregister2.setText("");
     }
-
     private void abrirActividadImagenes(Context c) {
         Activity a = null;
         a = (Activity) c;
         Intent i = new Intent(c, MuestraImagen.class);
+        if(!userregister.getText().toString().isEmpty()){
+            i.putExtra("Clave",userregister.getText().toString());
+            Utils.setUsuario(userregister.getText().toString());
+        }else{
+            i.putExtra("Clave",usuariologin.getText().toString());
+            Utils.setUsuario(usuariologin.getText().toString());
+        }
+        limpiar();
         a.startActivity(i);
     }
     public void abrirActividadFavoritos(Context c) {
@@ -135,12 +134,4 @@ public class Controlador implements View.OnClickListener {
         Intent i = new Intent(c, Favoritos.class);
         a.startActivity(i);
     }
-
-
-
-
-
-
-
-
 }
