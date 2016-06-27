@@ -47,11 +47,11 @@ public class FavoritosAdapter extends BaseAdapter {
         ImageView imageView;
         cargarFavs();
         if (convertView == null) {
-            // if it's not recycled, initialize some attributes
+
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(180, 180));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(5, 5, 5, 5);
+            imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            imageView.setPadding(1, 1, 1, 1);
         } else {
             imageView = (ImageView) convertView;
         }
