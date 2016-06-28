@@ -38,16 +38,16 @@ public class View_list extends AppCompatActivity {
         prepareMovieData();
     }
     private void prepareMovieData() {
-        Model_Lista movie = new Model_Lista("Mad Max: Fury Road", "Action & Adventure", 2015);
+        Model_Lista movie = new Model_Lista("titulo", "fecha", 2015);
         lista.add(movie);
 
-        movie = new Model_Lista("Inside Out", "Animation, Kids & Family", 2015);
+        movie = new Model_Lista("titulo", "fecha", 2015);
         lista.add(movie);
-        movie = new Model_Lista("Inside Out", "Animation, Kids & Family", 2015);
+        movie = new Model_Lista("titulo", "fecha", 2015);
         lista.add(movie);
-        movie = new Model_Lista("Inside Out", "Animation, Kids & Family", 2015);
+        movie = new Model_Lista("Inside Out", "fecha", 2015);
         lista.add(movie);
-        movie = new Model_Lista("Inside Out", "Animation, Kids & Family", 2015);
+        movie = new Model_Lista("Inside Out", "fecha", 2015);
         lista.add(movie);
         movie = new Model_Lista("Inside Out", "Animation, Kids & Family", 2015);
         lista.add(movie);
