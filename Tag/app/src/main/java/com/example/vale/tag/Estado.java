@@ -4,18 +4,18 @@ package com.example.vale.tag;
  * Created by Usuario on 28/06/2016.
  */
 public class Estado {
-    private boolean[] caps = new boolean[s_dummyItems.length];
-    public void setCaps(int position,boolean b) {
-        if (position < caps.length) {
-            caps[position] = b;
-        }
+
+    private boolean[] arrayEstados;
+
+    public Estado(int elementos) {
+        this.arrayEstados=new boolean[elementos];
     }
 
-    public boolean isCaps(int position) {
-        return caps[position];
+    public boolean estaMarcado(int posicion){
+        return arrayEstados[posicion];
     }
-     static final String[] s_dummyItems = new String[30];
-
-
+    public void actualizarEstado(int posicion,boolean estado){
+        arrayEstados[posicion]=estado;
+    }
 }
 

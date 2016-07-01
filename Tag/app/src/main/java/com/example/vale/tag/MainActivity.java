@@ -23,23 +23,39 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
 
-    private ListView lstOpciones;
-    Estado estado=new Estado();
+    private ListView lstOpciones;  
     private Lista_elementos[] datos =
             new Lista_elementos[]{
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1"),
-                    new Lista_elementos("Título 1")
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 2"),
+                    new Lista_elementos("Elemento 3"),
+                    new Lista_elementos("Elemento 4"),
+                    new Lista_elementos("Elemento 5"),
+                    new Lista_elementos("Elemento 6"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1"),
+                    new Lista_elementos("Elemento 1")
                    };
 
     @Override
@@ -49,13 +65,9 @@ public class MainActivity extends AppCompatActivity {
         lstOpciones = (ListView) findViewById(R.id.LstOpciones);
         AdaptadorTitulares adaptador = new AdaptadorTitulares(MainActivity.this, datos);
         lstOpciones.setAdapter(adaptador);
-       final Controlador control = new Controlador(this);
+        Controlador control = new Controlador(this);
 
-        lstOpciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                control.onClick(v);
-            }
-        });
+        lstOpciones.setOnItemClickListener(control);
     }
 
 
