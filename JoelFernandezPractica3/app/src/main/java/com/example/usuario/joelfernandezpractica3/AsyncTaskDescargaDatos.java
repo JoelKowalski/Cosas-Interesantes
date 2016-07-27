@@ -40,9 +40,10 @@ public class AsyncTaskDescargaDatos extends AsyncTask<String, Void, List<Product
 
         try
         {
-            url= new URL(Utils.URL_SERVER);
+            url= new URL(Utils.URL_SERVER+"?"+params[0]);
+
             httpConn = (HttpURLConnection) url.openConnection();
-            httpConn.setRequestMethod(params[0]);
+
             respuesta = httpConn.getResponseCode();
             if (respuesta == HttpURLConnection.HTTP_OK)
             {
@@ -64,6 +65,10 @@ public class AsyncTaskDescargaDatos extends AsyncTask<String, Void, List<Product
             httpConn.disconnect();
         }
         return  listProducto;
+    }
+    protected void onPostExecute(List<Producto> personas) {
+       // Controlador controlador = null;
+        Controlador.mostrarListaPersonas(personas);
     }
 
 

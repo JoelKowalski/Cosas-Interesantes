@@ -1,37 +1,42 @@
 package com.example.usuario.joelfernandezpractica3;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
-public class Catalogo extends AppCompatActivity {
+import java.util.List;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catalogo);
+public class Catalogo extends Fragment {
+
+
+public List<Producto> listaproductos=null;
+    public Catalogo() {
+        super();
     }
 
+    RecyclerView mRecycleView;
+    //Simplemente, inflo en contenido del fragment
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_catalogo, menu);
-        return true;
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.activity_catalogo, container, false);
+        listaproductos=Controlador.damelista();
+        RecyclerView rv = (RecyclerView) rootView.findViewById(R.id.rv_recycler_view);
+        rv.setHasFixedSize(true);
+        mRecycleView=(RecyclerView)rootView.findViewById(R.id.rv_recycler_view);
+        AdaptadorRecycle adapter = new AdaptadorRecycle(listaproductos,mRecycleView);
+        rv.setAdapter(adapter);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+        rv.setLayoutManager(llm);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        return rootView;
     }
 }

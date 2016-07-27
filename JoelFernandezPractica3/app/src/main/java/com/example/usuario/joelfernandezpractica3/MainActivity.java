@@ -9,7 +9,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button botonMesa,botonControlador,botonSoftware,botonAcces,botonCascos;
+    Button botonMesa,botonControlador,botonSoftware,botonAcces,botonCascos,botonMonitor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         botonCascos=(Button)findViewById(R.id.btncascos);
         botonControlador=(Button)findViewById(R.id.btncontrolador);
         botonSoftware=(Button)findViewById(R.id.btnsoftware);
+        botonMonitor=(Button)findViewById(R.id.btnmonitor);
         Controlador control = new Controlador(this);
 
         botonSoftware.setOnClickListener(control);
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         botonCascos.setOnClickListener(control);
         botonAcces.setOnClickListener(control);
         botonMesa.setOnClickListener(control);
+        botonMonitor.setOnClickListener(control);
 
     }
 

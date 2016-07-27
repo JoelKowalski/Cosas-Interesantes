@@ -1,6 +1,9 @@
 package com.example.usuario.joelfernandezpractica3;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import java.util.List;
@@ -9,8 +12,8 @@ import java.util.List;
  * Created by Usuario on 22/07/2016.
  */
 public class Controlador implements View.OnClickListener {
-    private Context c;
-    public List<Producto> listaProductos =null;
+    private static Context c;
+    public static List<Producto> listaProductos =null;
     public Controlador(Context c) {
         this.c = c;
     }
@@ -19,26 +22,43 @@ public class Controlador implements View.OnClickListener {
         int vista = v.getId();
         switch (vista) {
             case R.id.btnmesas:
-                llamarAsync("mesa");
+                llamarAsync("Mesa");
                 break;
             case R.id.btnacces:
-                llamarAsync("accesorio");
+                llamarAsync("Acces");
                 break;
             case R.id.btncascos:
-                llamarAsync("cascos");
+                llamarAsync("Cascos");
                 break;
             case R.id.btncontrolador:
-                llamarAsync("controlador");
+                llamarAsync("Controladora");
                 break;
             case R.id.btnsoftware:
-                llamarAsync("software");
+                llamarAsync("Software");
+                break;
+            case R.id.btnmonitor:
+                llamarAsync("Monitor");
                 break;
         }
     }
     public void llamarAsync(String peticion){
-       listaProductos=new AsyncTaskDescargaDatos(this.c).execute(peticion);
+      new AsyncTaskDescargaDatos(this.c).execute("nombre="+peticion);
     }
-   
-
+    public static void mostrarListaPersonas(List<Producto> lista) {
+       listaProductos=lista;
+       abrirActividadCatalogo();
+    }
+    public static void abrirActividadCatalogo() {
+        Activity a = null;
+        a = (Activity) c;
+        Intent i = new Intent(c, VentanaTab.class);
+        a.startActivity(i);
+    }
+    public static List<Producto> damelista(){
+        return  listaProductos;
+    }
 }
+
+
+
 
