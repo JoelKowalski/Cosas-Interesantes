@@ -3,7 +3,7 @@ import java.sql.SQLException;
 
 public class Producto {
 	String intro;
-	String imagenurl;
+	String imagen;
 	String nombre;
 	double precio;
 	int unidades;
@@ -18,12 +18,12 @@ public class Producto {
 		this.intro = intro;
 	}
 
-	public String getImagenurl() {
-		return imagenurl;
+	public String getImagen() {
+		return imagen;
 	}
 
-	public void setImagenurl(String imagenurl) {
-		this.imagenurl = imagenurl;
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public String getNombre() {
@@ -66,11 +66,11 @@ public class Producto {
 		this.categoria = categoria;
 	}	
 	
-	public Producto(String intro, String imagenurl, String nombre, double precio, int unidades, String descripcion,
+	public Producto(String intro, String imagen, String nombre, double precio, int unidades, String descripcion,
 			String categoria) {
 		super();
 		this.intro = intro;
-		this.imagenurl = imagenurl;
+		this.imagen = imagen;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.unidades = unidades;
@@ -80,7 +80,7 @@ public class Producto {
 	
 	public Producto(ResultSet rs) throws SQLException{
 		this.intro=rs.getString("intro");
-		this.imagenurl=rs.getString("imagenurl");
+		this.imagen=rs.getString("imagen");
 		this.nombre=rs.getString("nombre"); 
 		this.precio=rs.getDouble("precio");
 		this.unidades=rs.getInt("unidades");
