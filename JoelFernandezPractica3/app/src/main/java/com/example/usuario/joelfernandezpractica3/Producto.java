@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 public class Producto implements Parcelable{
     String intro;
-    String imagenurl;
+    String imagen;
     String nombre;
     double precio;
     int unidades;
@@ -23,12 +23,12 @@ public class Producto implements Parcelable{
         this.intro = intro;
     }
 
-    public String getImagenurl() {
-        return imagenurl;
+    public String getImagen() {
+        return imagen;
     }
 
-    public void setImagenurl(String imagenurl) {
-        this.imagenurl = imagenurl;
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -71,11 +71,11 @@ public class Producto implements Parcelable{
         this.categoria = categoria;
     }
 
-    public Producto(String intro, String imagenurl, String nombre, double precio, int unidades, String descripcion,
+    public Producto(String intro, String imagen, String nombre, double precio, int unidades, String descripcion,
                     String categoria) {
         super();
         this.intro = intro;
-        this.imagenurl = imagenurl;
+        this.imagen = imagen;
         this.nombre = nombre;
         this.precio = precio;
         this.unidades = unidades;
@@ -91,7 +91,7 @@ public class Producto implements Parcelable{
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.intro);
-        dest.writeString(this.imagenurl);
+        dest.writeString(this.imagen);
         dest.writeString(this.nombre);
         dest.writeDouble(this.precio);
         dest.writeInt(this.unidades);
@@ -111,11 +111,13 @@ public class Producto implements Parcelable{
     public Producto (Parcel in)
     {
         this.intro=in.readString();
-        this.imagenurl=in.readString();
+        this.imagen =in.readString();
         this.nombre = in.readString();//si tuviera varios string, deo leer los camps en el orden en el que fueron escritos para que la corresponsendia sea total
         this.precio=in.readDouble();
         this.unidades = in.readInt();
         this.descripcion=in.readString();
         this.categoria=in.readString();
     }
+
+
 }

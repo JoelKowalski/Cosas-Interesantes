@@ -1,41 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-   tools:context=".MainActivity"
+
+    android:background="@drawable/fondo"
     android:orientation="vertical">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/tituloinicial"></LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mesas"
-        android:id="@+id/btnmesas" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Controlador"
-        android:id="@+id/btncontrolador" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Software"
-        android:id="@+id/btnsoftware" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Auriculares"
-        android:id="@+id/btncascos" />
-
-    <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Accesorios"
-    android:id="@+id/btnacces" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="monitores"
-        android:id="@+id/btnmonitor" />
 </LinearLayout>

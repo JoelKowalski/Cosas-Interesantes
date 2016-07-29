@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -52,7 +53,8 @@ public class AsyncTaskDescargaDatos extends AsyncTask<String, Void, List<Product
                 br = new BufferedReader(isr);
                 String json_producto = br.readLine();
                 Gson gson = new Gson();
-                listProducto = gson.fromJson (json_producto, new TypeToken<ArrayList<Producto>>(){}.getType());
+                listProducto = gson.fromJson(json_producto, new TypeToken<ArrayList<Producto>>() {
+                }.getType());
             }
             httpConn.disconnect();
         } catch (Throwable t)
@@ -60,14 +62,13 @@ public class AsyncTaskDescargaDatos extends AsyncTask<String, Void, List<Product
             Log.e(getClass().getCanonicalName(), "Ha ido mal la com con el server", t);
         }
 
-        finally//haya habido o no excepción, te metes por aquí, para liberar recursos
-        {
+        finally{
             httpConn.disconnect();
         }
         return  listProducto;
     }
     protected void onPostExecute(List<Producto> personas) {
-       // Controlador controlador = null;
+
         Controlador.mostrarListaPersonas(personas);
     }
 

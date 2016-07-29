@@ -25,7 +25,7 @@ public class PageAdapter  extends FragmentStatePagerAdapter {
         {
             case 0: fragment = new Catalogo();
                 break;
-            default: fragment = new Historico();
+            default: fragment = new HistoricoVista();
         }
 
         return  fragment;
