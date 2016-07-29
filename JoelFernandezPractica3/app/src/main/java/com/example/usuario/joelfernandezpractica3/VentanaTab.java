@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 /**
  * Created by Usuario on 26/07/2016.
@@ -23,7 +25,7 @@ public class VentanaTab  extends AppCompatActivity {
 
 
     //Este será el título visible por cada fragment
-    private static String[] titulo_tab = {"OPTION 1" , "OPTION 2"};
+    private static String[] titulo_tab = {"Catalogo" , "Historico"};
 
 
     public static String getTitulo (int posicion)
@@ -35,6 +37,8 @@ public class VentanaTab  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_ventanastab);
 
 
@@ -46,6 +50,7 @@ public class VentanaTab  extends AppCompatActivity {
 
         //Obtengo referencia al tablayout
              TabLayout tabLayout = (TabLayout) findViewById(R.id.tablay);
+
         //creo dinámicamente sus elementos. Sólo 2
               tabLayout.addTab(tabLayout.newTab());
               tabLayout.addTab(tabLayout.newTab());

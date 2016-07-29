@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 public class Controlador implements View.OnClickListener {
     private static Context c;
     public static List<Producto> listaProductos =null;
-    public static List<Bitmap> listaimagenes =null;
+    public static List<Bitmap> listaimagenes =new ArrayList<>();
 
     public Bitmap bitmap;
     public Controlador(Context c) {
@@ -34,18 +35,16 @@ public class Controlador implements View.OnClickListener {
     public static void mostrarListaPersonas(List<Producto> lista) {
         Bitmap bitmap=null;
        listaProductos=lista;
-/*
+
         for(Producto p:lista) {
             try {
-
-                Log.i("Producto",p.toString());
-                bitmap = new AsyncTaskImagenes(c).execute(p.getImagen()).get();
+                Log.i("Producto",p.getNombre());
+                bitmap = new AsyncTaskImagenes(c).execute("https://u.cdn.sera.to/content/images/45/21845/21845_article_big.png").get();
                 listaimagenes.add(bitmap);
             } catch (Throwable t) {
                 Log.d("Error", "Error descargando la imagen", t);
             }
-        }*/
-
+        }
        abrirActividadCatalogo();
     }
 

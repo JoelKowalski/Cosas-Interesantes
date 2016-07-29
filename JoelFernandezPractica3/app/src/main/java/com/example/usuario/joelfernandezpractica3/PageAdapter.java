@@ -14,8 +14,7 @@ public class PageAdapter  extends FragmentStatePagerAdapter {
         super(fm);
     }
 
-    //De forma similar al GETVIEW, este adpater también devuelve una vista
-    //pero en este caso, es un Fragment! (y se llama getItem)
+
     @Override
     public Fragment getItem(int posicion) {
 

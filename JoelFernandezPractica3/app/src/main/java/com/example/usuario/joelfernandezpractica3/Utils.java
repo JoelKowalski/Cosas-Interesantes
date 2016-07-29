@@ -1,9 +1,19 @@
 package com.example.usuario.joelfernandezpractica3;
 
+import android.animation.Animator;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -13,6 +23,12 @@ import java.util.List;
  * Created by Usuario on 22/07/2016.
  */
 public class Utils {
+    private Animator mCurrentAnimator;
+
+    // The system "short" animation time duration, in milliseconds. This
+    // duration is ideal for subtle animations or animations that occur
+    // very frequently.
+    private int mShortAnimationDuration;
     public static final String URL_SERVER = "http://192.168.1.130:8081/ServerPractica3/Servidor";
 
     public static Bitmap codificarImagen (Bitmap imagen) {
@@ -38,5 +54,7 @@ public class Utils {
         listViewItems.add(new ItemsObject("Ver todo", R.drawable.vertodo));
         return listViewItems;
     }
+
+
 
 }

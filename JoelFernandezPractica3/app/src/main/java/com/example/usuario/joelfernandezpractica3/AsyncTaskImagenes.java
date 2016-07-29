@@ -35,13 +35,7 @@ public class AsyncTaskImagenes extends AsyncTask<String, Void, Bitmap> {
             respuesta = httpConn.getResponseCode();
             if (respuesta == HttpURLConnection.HTTP_OK) {
                 in = httpConn.getInputStream();
-                bitmap = Glide.
-                        with(c).
-                        load(params[0]).
-                        asBitmap().
-                        into(-1,-1).
-                        get();
-               // Utils.codificarImagen(bitmap = BitmapFactory.decodeStream(in));
+                Utils.codificarImagen(bitmap = BitmapFactory.decodeStream(in));
                 in.close();
             }
 

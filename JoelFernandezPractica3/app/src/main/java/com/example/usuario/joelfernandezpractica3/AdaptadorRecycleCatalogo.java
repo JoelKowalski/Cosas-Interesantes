@@ -61,7 +61,7 @@ Context context;
     public void onBindViewHolder(MyViewHolderCatalogo holder, int position) {
         holder.nombre.setText(mDataset.get(position).getNombre());
         holder.intro.setText(mDataset.get(position).getIntro());
-        //holder.imagenproducto.setImageBitmap(mDatasetImage.get(position));
+        holder.imagenproducto.setImageBitmap(mDatasetImage.get(position));
 
 
 
