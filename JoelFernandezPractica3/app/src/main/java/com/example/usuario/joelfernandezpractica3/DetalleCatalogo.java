@@ -20,7 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class DetalleCatalogo extends AppCompatActivity {
-   TextView nombredetalle,preciodetalle,unidadesdetalle,descripciondetalle;
+    TextView nombredetalle,preciodetalle,unidadesdetalle,descripciondetalle;
     ImageView imagenproducto;
 
     @Override
@@ -38,7 +38,6 @@ public class DetalleCatalogo extends AppCompatActivity {
         Producto producto = b.getParcelable("clave");
         nombredetalle.setText(producto.getNombre());
         unidadesdetalle.setText(String.valueOf(producto.getUnidades()));
-        // imagenproducto.setImageResource(R.drawable.imagendetalle);
         Bitmap mbitmap = ((BitmapDrawable) getResources().getDrawable(R.drawable.imagendetalle)).getBitmap();
         Bitmap imageRounded = Bitmap.createBitmap(mbitmap.getWidth(), mbitmap.getHeight(), mbitmap.getConfig());
         Canvas canvas = new Canvas(imageRounded);
@@ -71,16 +70,13 @@ public class DetalleCatalogo extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_detalle_catalogo, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {

@@ -23,22 +23,9 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        /*botonMesa=(Button)findViewById(R.id.btnmesas);
-        botonAcces=(Button)findViewById(R.id.btnacces);
-        botonCascos=(Button)findViewById(R.id.btncascos);
-        botonControlador=(Button)findViewById(R.id.btncontrolador);
-        botonSoftware=(Button)findViewById(R.id.btnsoftware);
-        botonMonitor=(Button)findViewById(R.id.btnmonitor);
-        */
+
         Controlador control = new Controlador(this);
-/*
-        botonSoftware.setOnClickListener(control);
-        botonControlador.setOnClickListener(control);
-        botonCascos.setOnClickListener(control);
-        botonAcces.setOnClickListener(control);
-        botonMesa.setOnClickListener(control);
-        botonMonitor.setOnClickListener(control);
-*/
+
 
         RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

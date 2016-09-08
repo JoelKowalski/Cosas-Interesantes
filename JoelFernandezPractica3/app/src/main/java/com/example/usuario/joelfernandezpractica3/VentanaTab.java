@@ -42,22 +42,15 @@ public class VentanaTab  extends AppCompatActivity {
         setContentView(R.layout.activity_ventanastab);
 
 
-        // Obtengo la referencia al viewPager y le asigno su adapter
         viewPager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new PageAdapter(getSupportFragmentManager());
         viewPager.setAdapter(pagerAdapter);
 
-
-        //Obtengo referencia al tablayout
              TabLayout tabLayout = (TabLayout) findViewById(R.id.tablay);
 
-        //creo dinámicamente sus elementos. Sólo 2
               tabLayout.addTab(tabLayout.newTab());
               tabLayout.addTab(tabLayout.newTab());
 
-
-        //Importantísimo: lo asocio al viewpager y automáticamente
-        //cuando seleccione un tab, será como pedírselo al viewpager
 
         tabLayout.setupWithViewPager(viewPager);
 
