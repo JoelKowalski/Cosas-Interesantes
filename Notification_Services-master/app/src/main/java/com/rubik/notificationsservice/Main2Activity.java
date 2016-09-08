@@ -31,11 +31,9 @@ public class Main2Activity extends AppCompatActivity {
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(img_zip,0,img_zip.length);
 
-        //Referencias a los objetos
         TextView tiempoLBL = (TextView) findViewById(R.id.textView);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
 
-        //Asignamos valor a los objetos
         tiempoLBL.setText(time.toString());
         imageView.setImageBitmap(bitmap);
         iniciarAlarma(60000,this);

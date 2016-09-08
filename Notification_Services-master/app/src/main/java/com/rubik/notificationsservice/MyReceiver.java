@@ -12,7 +12,7 @@ import android.util.Log;
 public class MyReceiver extends BroadcastReceiver {
     private Context context;
     private byte [] img_zip;
-    private Long time;
+    private long time;
 
     public MyReceiver() {
         this.context = context;
@@ -22,28 +22,20 @@ public class MyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(getClass().getCanonicalName(), "Me han llamado desde un service!");
         this.context = context;
-
+        long numero_media=0;
         //Obtenemos los extras del intent
         this.img_zip = intent.getExtras().getByteArray("BITMAP");
-        time = intent.getLongExtra("TIME",0);
+        time = intent.getLongExtra("TIME", 0);
 
-        Log.d(getClass().getCanonicalName(), "Vamos a abir la notificacion:)");
+        while(Utils.getContador(context)<10) {
+            Utils.setTiempo(time, context);
+            Log.i("eeh",String.valueOf(Utils.getContador(context)));
+        }
+        for(int i=0;i<=10;i++){
+            numero_media+=Utils.getTiempo(context,i);
+        }
         lanzarNotificacion("Bien Jugaoooo");
-
-        /*
-             //Intent de llamada a la actividad detalle
-            Intent intent2 = new Intent(context,Main2Activity.class);
-
-           // intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            //Metemos datos en el intent
-            intent2.putExtra("TIME", time);
-            intent2.putExtra("BITMAP", this.img_zip);
-
-            //Lanzamos nueva actividad
-            context.startActivity(intent2);
-         */
-
+        time=numero_media/10;
     }
 
     private void lanzarNotificacion (String mensaje) {
