@@ -9,7 +9,7 @@ import android.net.NetworkInfo;
  */
 public class Utils {
 
-    public static final String URL_DESCARGA="";
+    public static final String URL_DESCARGA="http://192.168.1.130:8081/ServerPractica4/ObtenerListaRecados";
 
     public static boolean isNetworkAvailable(Context context) {
 
