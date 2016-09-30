@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
                 phoneNo = cursor.getString(phoneIndex);
                 name = cursor.getString(nameIndex);
-                textView1.setText(name);
-                textView2.setText(phoneNo);
+                mostrar(name,phoneNo);
 
             } catch (Exception e)
             {
@@ -68,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void logizador(String tag,String mensaje){
         Log.e(tag, mensaje);
+    }
+    private void mostrar(String name,String phoneNo){
+        textView1.setText(name);
+        textView2.setText(phoneNo);
     }
 
 
