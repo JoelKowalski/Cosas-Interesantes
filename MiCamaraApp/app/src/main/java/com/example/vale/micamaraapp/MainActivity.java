@@ -1,11 +1,14 @@
 package com.example.vale.micamaraapp;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +25,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int CODIGO_ACTIVIDAD = 100;
-    private String ruta_captura_foto;
+    private String[] ruta_captura_foto;
+    private int nfoto;
     private static final String SUFIJO_FOTO = ".jpg";
     private static final String PREFIJO_FOTO = "VALE_PIC_";
     List<Bitmap> lista = new ArrayList<Bitmap>();
@@ -41,32 +45,34 @@ public class MainActivity extends AppCompatActivity {
         String nombre_fichero = null;
         File f = null;
 
-            momento_actual = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()); //así nos garantizamos emplear un sufijo aleatorio: el nombre del archivo de la imagen incluirá el momento exacto
-            nombre_fichero = PREFIJO_FOTO + momento_actual + SUFIJO_FOTO;
+        momento_actual = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()); //así nos garantizamos emplear un sufijo aleatorio: el nombre del archivo de la imagen incluirá el momento exacto
 
-            ruta_captura_foto = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()+"/"+nombre_fichero;
+        nombre_fichero = PREFIJO_FOTO + momento_actual.trim() + SUFIJO_FOTO;
 
-            Log.d(getClass().getCanonicalName(), "RUTA FOTO = " + ruta_captura_foto);
-
-
-            f = new File(ruta_captura_foto);
+        ruta_captura_foto[nfoto] = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getPath()+"/"+nombre_fichero;
 
 
-            try
-            {
-                if (f.createNewFile())
-                   Log.d(getClass().getCanonicalName(), "Fichero creado");
-                else
-                        Log.d(getClass().getCanonicalName(), "Fichero NO creado (ya existía)");
-            }
-            catch (IOException e)
-            {
-                Log.e(getClass().getCanonicalName(), "Error creando el fichero", e);
-            }
+        Log.d(getClass().getCanonicalName(), "RUTA FOTO = " + ruta_captura_foto);
 
-            uri_dest = Uri.fromFile(f);
 
-            Log.d(getClass().getCanonicalName(), "URI FOTO = " + uri_dest.toString());
+        f = new File(ruta_captura_foto[nfoto]);
+
+
+        try
+        {
+            if (f.createNewFile())
+                Log.d(getClass().getCanonicalName(), "Fichero creado");
+            else
+                Log.d(getClass().getCanonicalName(), "Fichero NO creado (ya existía)");
+        }
+        catch (IOException e)
+        {
+            Log.e(getClass().getCanonicalName(), "Error creando el fichero", e);
+        }
+
+        uri_dest = Uri.fromFile(f);
+
+        Log.d(getClass().getCanonicalName(), "URI FOTO = " + uri_dest.toString());
 
 
         return uri_dest;
@@ -76,16 +82,22 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Uri photoURI = null;
+        ruta_captura_foto = new String[3];
+        nfoto = 0;
+        //Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        for(int i=0;i<3;i++) {
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-      for(int i=0;i<3;i++) {
-          Uri photoURI = crearFicheroImagen();
-          intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI); //He aquí la parte opcional del código: de emplearse este parámetro, la foto tomada se almacena en una localización concreta y de omitirse, se alamcena en una localización aleatoria
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-          startActivityForResult(intent, CODIGO_ACTIVIDAD);//el segundo parámetro es una forma de identificar la petición, para poder ser recibida posteriormente, además de indicarle a Android que será una Actividad HIJA
-      }
-          this.listView = (ListView) findViewById(R.id.listView);
-          this.listView.setAdapter(new ListaImagenes(this, lista));
+            photoURI = crearFicheroImagen();
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI); //He aquí la parte opcional del código: de emplearse este parámetro, la foto tomada se almacena en una localización concreta y de omitirse, se alamcena en una localización aleatoria
+
+            startActivityForResult(intent, nfoto);//el segundo parámetro es una forma de identificar la petición, para poder ser recibida posteriormente, además de indicarle a Android que será una Actividad HIJA
+            nfoto++;
+        }
+        this.listView = (ListView) findViewById(R.id.listView);
+        this.listView.setAdapter(new ListaImagenes(this, lista,photoURI));
 
     }
 
@@ -98,42 +110,41 @@ public class MainActivity extends AppCompatActivity {
         {
             case RESULT_OK:
 
-                    Log.d(getClass().getCanonicalName(), "La cosa fue bien Código " + resultCode);
-                    Bitmap bitmap = null; //la foto que se mostrará en la actividad
+                Log.d(getClass().getCanonicalName(), "La cosa fue bien Código " + resultCode);
+                Bitmap bitmap = null; //la foto que se mostrará en la actividad
 
-                    if (data == null)//el fichero ha sido guarado en una ruta => se ha usado el putExtra MediaStore.EXTRA_OUTPUT
+                if (data == null)//el fichero ha sido guarado en una ruta => se ha usado el putExtra MediaStore.EXTRA_OUTPUT
+                {
+                    Log.d(getClass().getCanonicalName(), "Se empleó el parámetro MediaStore.EXTRA_OUTPUT");
+
+                    try
                     {
-                        Log.d(getClass().getCanonicalName(), "Se empleó el parámetro MediaStore.EXTRA_OUTPUT");
-
-                        try
-                        {
-                            File imgFile = new  File(ruta_captura_foto);
-                            bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        File imgFile = new  File(ruta_captura_foto[requestCode]);
+                        bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
 
-                        } catch (Exception e)
-                        {
-                            Log.e(getClass().getCanonicalName(), "ERRORAZO recuperadno la foto tomada" , e);
-                        }
+                    } catch (Exception e)
+                    {
+                        Log.e(getClass().getCanonicalName(), "ERRORAZO recuperadno la foto tomada" , e);
                     }
-                    else
-                    { //la foto ha sido capturada y devuelta en un intent = NO se ha usado el putExtra MediaStore.EXTRA_OUTPUT
+                }
+                else
+                { //la foto ha sido capturada y devuelta en un intent = NO se ha usado el putExtra MediaStore.EXTRA_OUTPUT
 
-                        Log.d(getClass().getCanonicalName(), "NO Se empleó el parámetro MediaStore.EXTRA_OUTPUT : se devolvió el bitmap");
-                        bitmap = (Bitmap) data.getExtras().get("data");
-                    }
+                    Log.d(getClass().getCanonicalName(), "NO Se empleó el parámetro MediaStore.EXTRA_OUTPUT : se devolvió el bitmap");
+                    bitmap = (Bitmap) data.getExtras().get("data");
+                }
 
                 lista.add(bitmap);
 
                 break;
 
             case RESULT_CANCELED:
-                    Log.d(getClass().getCanonicalName(), "La cosa se canceló " + resultCode);
+                Log.d(getClass().getCanonicalName(), "La cosa se canceló " + resultCode);
                 break;
 
             default:
                 Log.d(getClass().getCanonicalName(), "FIN CON CÓDIGO " + resultCode);
-
         }
     }
 
